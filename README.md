@@ -4,14 +4,14 @@ In a big projects it require common utility/helper functions on top of existing 
 
 Ex: These are few examples which common appear in most of the projects.
 
-**1. Date utilities **
+**1. Date utilities**
 
-**2. Thread utilities **
+**2. Thread utilities**
 
-**3. Crypto utilities **
+**3. Crypto utilities**
 
-**4. Handling http calls **
+**4. Handling http calls**
 
-**5. Json handling **
+**5. Json handling**
 
-**6. Common helper functions ** 
+**6. Common helper functions** 

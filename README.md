@@ -8,9 +8,7 @@ These are few usage examples which commonly appear in most of the java projects.
 
   Convert current time to ISO8601Format
   
-  ```java
-  String iso8601DateStr = DateUtil.getIso8601Format(System.currentTimeMillis());   
-  ```
+     String iso8601DateStr = DateUtil.getIso8601Format(System.currentTimeMillis());   
   
   Get start time of the given day and convert to ISO8601 string
      
@@ -22,41 +20,40 @@ These are few usage examples which commonly appear in most of the java projects.
 **2. Thread utilities**
 
    In order to span multiple tasks at the same time and wait for responses
-      ```java
-      private Callable<String> create(final String message, final long sleepTime) {
-		Callable<String> c = new Callable<String>() {
-
-			@Override
-			public String call() throws Exception {
-				logger.info("Executing task: " + Thread.currentThread().getId());
-				CommonUtil.sleep(sleepTime);
-				return message;
-			}
-		};
-		return c;
-	 }
       
-      List<Callable<String>> tasks = new ArrayList<>();
-      tasks.add(create("Task1", 3000));
-      tasks.add(create("Task2", 2000));
-      tasks.add(create("Task3", 4000));
-      List<String> results = ParallelTaskHelper.execute("Test", tasks);
-      logger.info(results + "");
-      ```
+     private Callable<String> create(final String message, final long sleepTime) {
+	     Callable<String> c = new Callable<String>() {
+	     
+               @Override
+               public String call() throws Exception {
+                       logger.info("Executing task: " + Thread.currentThread().getId());
+                       CommonUtil.sleep(sleepTime);
+                       return message;
+                }
+            };
+            return c;
+     }
+      
+     List<Callable<String>> tasks = new ArrayList<>();
+     tasks.add(create("Task1", 3000));
+     tasks.add(create("Task2", 2000));
+     tasks.add(create("Task3", 4000));
+     List<String> results = ParallelTaskHelper.execute("Test", tasks);
+     logger.info(results + "");
+      
 **3. Crypto utilities**
   
   To encrypt and decrpt the string
   
-      ```java
-      String xxx = "Hello World";
-      String encrypt = CryptUtil.encrypt(xxx);
-      logger.info(encrypt);
-      logger.info(CryptUtil.decrypt(encrypt));
-      ```
+     String xxx = "Hello World";
+     String encrypt = CryptUtil.encrypt(xxx);
+     logger.info(encrypt);
+     logger.info(CryptUtil.decrypt(encrypt));
+
    To get MD5 checksum for a string
    
-      String str = "some string";
-      String checksum = CryptUtil.md5Digest(str.getBytes("UTF-8"));
+     String str = "some string";
+     String checksum = CryptUtil.md5Digest(str.getBytes("UTF-8"));
       
 **4. Handling http calls**
   

@@ -68,6 +68,7 @@ These are few usage examples which commonly appear in most of the java projects.
   `HttpUtil` is a highly scalable URL handling methods in Java which developed based on apache httpclient library. It uses `PooledConnectionFactory` from apache library to optimize call to the same server.
   
   Simple usage of getting response from a URL
+      
       ```
       String response = HttpUtil.executeGet(<url>, null);
       

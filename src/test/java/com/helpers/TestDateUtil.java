@@ -195,7 +195,7 @@ public class TestDateUtil {
 	// @Test
 	public void testList() {
 		String testFile = "src/test/resources/5001189/Carrie_Underwood.gexf";
-		logger.info(CommonUtil.rollverFileName(testFile, 1024));
+		logger.info(CommonUtil.rolloverFileName(testFile, 1024));
 	}
 
 	// @Test

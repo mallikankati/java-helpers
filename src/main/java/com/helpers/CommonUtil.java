@@ -256,7 +256,7 @@ public final class CommonUtil {
 		return (word != null && (word.contains(" ") || word.contains("_")));
 	}
 
-	public static String rollverFileName(String fileName, long rollSize) {
+	public static String rolloverFileName(String fileName, long rollSize) {
 		String derivedFileName = null;
 		File file = new File(fileName);
 		long size = file.length();

@@ -1,0 +1,70 @@
+apply plugin: 'war'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+def ENV = System.getenv()
+def BUILD_DIR = "bin"
+
+repositories{
+   flatDir{
+      dirs 'lib/*.*'
+   }
+}
+
+dependencies {
+    //compile 'org.springframework:spring-context:4.0.2.RELEASE' 
+    //testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile fileTree(dir: 'lib', include:['**/*.jar'])
+}
+
+jar {
+    baseName = 'java-helpers'
+    version =  '1.0'
+}
+
+
+task onejar(type: Jar, dependsOn:[compileJava, processResources, classes]){
+   def myCleanList = [
+      BUILD_DIR + "../classes",
+      BUILD_DIR + "../tmp/expandedArchives",
+      BUILD_DIR + "../tmp/onejar"  
+   ]
+   myCleanList.each{delete it}
+   from files(sourceSets.main.output.classesDir) {
+      exclude '**/com.bumebox.web.*'
+   }
+   from files(sourceSets.main.output.resourcesDir){
+      exclude '**/config.properties'
+   }
+   from (configurations.compile.collect { it.isDirectory() ? it : zipTree(it)}){
+      //exclude 'META-INF/MANIFEST.MF'
+      exclude 'META-INF/*.SF'
+      exclude 'META-INF/*.DSA'
+      exclude 'META-INF/*.RSA'
+      exclude 'META-INF/license/*.*'
+      exclude '**/license.txt'
+      //ignore few jar files
+      exclude '**/spring-web*.jar'
+      exclude '**/spring-test*.jar'
+      exclude '**/spring-security*.jar'
+      exclude 'lib/junit/*.jar'
+      exclude 'lib/hamcrest/*.jar'
+      exclude '**/servlet-*.jar'
+      //ignore static files in jar
+      exclude 'webapps/static/*.*'
+      exclude 'hbase-webapps/*.*'
+      exclude '**/com.bumebox.web.*'
+      exclude '**/com.bumebox.*/Test*.class'
+      exclude ''
+   }
+ 
+} 
+
+task showMeCache << {
+  configurations.compile.each { println it }
+}
+
+buildscript {
+    dependencies { classpath fileTree(dir: 'tools/gradle-2.0/lib/plugins', include:['**/*.jar'])}
+}

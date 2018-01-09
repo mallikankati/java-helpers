@@ -1,8 +1,8 @@
 ## Utility/Helpers methods which used in java projects
 
-In a big projects, requires common utility/helper methods on top of existing frameworks. I compiled very useful helpers methods in different category. Please go through the source code for more details
+Big java project requires common utility/helper methods on top of existing frameworks. I compiled very useful helpers methods in different category. Please go through the source code for more details
 
-These are few usage examples which commonly appear in most of the java projects. Look for more methods in respective `*Util and *Helper` classes.
+These are the few usage examples which commonly appear in most of the projects. Look for more methods in respective `*Util and *Helper` classes.
 
 **1. Date utilities**
 
@@ -43,6 +43,8 @@ These are few usage examples which commonly appear in most of the java projects.
       
 **3. Crypto utilities**
   
+  `CryptUtil` contains all the cryptographic and encode/decode methods which commonly used in most of the projects. Ex: urlencode/decode and encrypt/decrypt strings
+  
   To encrypt and decrpt the string
   
      String xxx = "Hello World";
@@ -69,6 +71,41 @@ These are few usage examples which commonly appear in most of the java projects.
       String response = HttpUtil.executeGet(url, "", customHeaders);
       logger.info(response);
       
+      //download a file from internet and stores in specified directory
+      HttpUtil.downloadFile(<url>, null, <directory>, <file>);
+      
 **5. Json handling**
 
+  `JsonUtil` contains highly used json conversion methods. Here are the few examples
+  
+      // converting json to java bean
+      TestBean testBean = JsonUtil.fromJson(jsonString, TestBean.class);
+      
+      //converting Java bean to json
+      String jsonString = JsonUtil.toJson(testBean);
+      
+      //converting json to java map, need to send concrete map and its key/value types
+      Map<String, Object> map = JsonUtil.fromJson(jsonString, new TypeReference<Map<String, Object>>(){});
+      
+      //converting map to json
+      String jsonString = JsonUtil.toJson(map);
+      
+      //converting json to list of java beans
+      List<TestBean> testBeanList = JsonUtil.fromJson(jsonString, new TypeReference<List<TestBean>>(){})
+      
+      //converting list to json
+      String jsonString = JsonUtil.toJson(testBeanList)
+      
 **6. Common helper functions** 
+
+  `CommonUtil` contains utility methods 
+      
+      //replacing all special characters from string
+      String str = CommonUtil.replaceAllSpecialChars(<send dirty string>);
+      
+      //If file exceeds given size, it will roll over and generates new name
+      String fileName = CommonUtil.rolloverFilename(String fileName, long size);
+      
+      //Converts image to base64 encoded string
+      String base64EncodedStr = CommonUtil.convertImageToBase64Encode(<image file name>);
+      

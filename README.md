@@ -8,13 +8,17 @@ These are the few usage examples which commonly appear in most of the projects. 
 
   Convert current time to ISO8601Format
   
-     String iso8601DateStr = DateUtil.getIso8601Format(System.currentTimeMillis());   
+  ```java
+   String iso8601DateStr = DateUtil.getIso8601Format(System.currentTimeMillis());
+   ```
   
   Get start time of the given day and convert to ISO8601 string
-     
-     long dayStarTime = DateUtil.getDayStartTime();
-     String iso8601DateStr = DateUtil.getIso8601Format(dayStartTime);
-     
+   
+   ```java
+   long dayStarTime = DateUtil.getDayStartTime();
+   String iso8601DateStr = DateUtil.getIso8601Format(dayStartTime);
+   ```
+   
   For more examples look at `DateUtil` class which has self explained methods
   
 **2. Thread utilities**

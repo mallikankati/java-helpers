@@ -51,65 +51,76 @@ These are the few usage examples which commonly appear in most of the projects. 
   
   To encrypt and decrpt the string
   
-     String xxx = "Hello World";
-     String encrypt = CryptUtil.encrypt(xxx);
-     logger.info(encrypt);
-     logger.info(CryptUtil.decrypt(encrypt));
-
+  ```java
+   String xxx = "Hello World";
+   String encrypt = CryptUtil.encrypt(xxx);
+   logger.info(encrypt);
+   logger.info(CryptUtil.decrypt(encrypt));
+   ```
    To get MD5 checksum for a string
    
-     String str = "some string";
-     String checksum = CryptUtil.md5Digest(str.getBytes("UTF-8"));
-      
+   ```java
+   String str = "some string";
+   String checksum = CryptUtil.md5Digest(str.getBytes("UTF-8"));
+   ```
+   
 **4. Handling http calls**
   
   `HttpUtil` is a highly scalable URL handling methods in Java which developed based on apache httpclient library. It uses `PooledConnectionFactory` from apache library to optimize call to the same server.
   
   Simple usage of getting response from a URL
+   
+   ```java
+   //Simple get request
+   String response = HttpUtil.executeGet(<url>, null);
       
-      String response = HttpUtil.executeGet(<url>, null);
+   //with custom headers
+   Map<String, String> customHeaders = new HashMap<>();
+   customHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5)");
+   String response = HttpUtil.executeGet(url, "", customHeaders);
+   logger.info(response);
       
-      //with custom headers
-      Map<String, String> customHeaders = new HashMap<>();
-      customHeaders.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5)");
-      String response = HttpUtil.executeGet(url, "", customHeaders);
-      logger.info(response);
-      
-      //download a file from internet and stores in specified directory
-      HttpUtil.downloadFile(<url>, null, <directory>, <file>);
-      
+   //download a file from internet and stores in specified directory
+   HttpUtil.downloadFile(<url>, null, <directory>, <file>);
+   ```
+   
 **5. Json handling**
 
   `JsonUtil` contains highly used json conversion methods. Here are the few examples
   
-      // converting json to java bean
-      TestBean testBean = JsonUtil.fromJson(jsonString, TestBean.class);
+   ```java
+   // converting json to java bean
+   TestBean testBean = JsonUtil.fromJson(jsonString, TestBean.class);
       
-      //converting Java bean to json
-      String jsonString = JsonUtil.toJson(testBean);
+   //converting Java bean to json
+   String jsonString = JsonUtil.toJson(testBean);
       
-      //converting json to java map, need to send concrete map and its key/value types
-      Map<String, Object> map = JsonUtil.fromJson(jsonString, new TypeReference<Map<String, Object>>(){});
+   //converting json to java map, need to send concrete map and its key/value types
+   Map<String, Object> map = JsonUtil.fromJson(jsonString, new TypeReference<Map<String, Object>>(){});
       
-      //converting map to json
-      String jsonString = JsonUtil.toJson(map);
+   //converting map to json
+   String jsonString = JsonUtil.toJson(map);
       
-      //converting json to list of java beans
-      List<TestBean> testBeanList = JsonUtil.fromJson(jsonString, new TypeReference<List<TestBean>>(){})
+   //converting json to list of java beans
+   List<TestBean> testBeanList = JsonUtil.fromJson(jsonString, new TypeReference<List<TestBean>>(){})
       
-      //converting list to json
-      String jsonString = JsonUtil.toJson(testBeanList)
-      
+   //converting list to json
+   String jsonString = JsonUtil.toJson(testBeanList)
+   ```
+   
 **6. Common helper functions** 
 
   `CommonUtil` contains utility methods 
+   
+   ```java
+   //replacing all special characters from string
+   String str = CommonUtil.replaceAllSpecialChars(<send dirty string>);
       
-      //replacing all special characters from string
-      String str = CommonUtil.replaceAllSpecialChars(<send dirty string>);
+   //If file exceeds given size, it will roll over and generates new name
+   String fileName = CommonUtil.rolloverFilename(String fileName, long size);
       
-      //If file exceeds given size, it will roll over and generates new name
-      String fileName = CommonUtil.rolloverFilename(String fileName, long size);
-      
-      //Converts image to base64 encoded string
-      String base64EncodedStr = CommonUtil.convertImageToBase64Encode(<image file name>);
+   //Converts image to base64 encoded string
+   String base64EncodedStr = CommonUtil.convertImageToBase64Encode(<image file name>);
+   ```
+   
       

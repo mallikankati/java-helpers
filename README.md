@@ -29,23 +29,23 @@ These are the few usage examples which commonly appear in most of the projects. 
    private Callable<String> create(final String message, final long sleepTime) {
 	 Callable<String> c = new Callable<String>() {
 	     
-               @Override
-               public String call() throws Exception {
-                       logger.info("Executing task: " + Thread.currentThread().getId());
-                       CommonUtil.sleep(sleepTime);
-                       return message;
-                }
-            };
-            return c;
-     }
+             @Override
+             public String call() throws Exception {
+                    logger.info("Executing task: " + Thread.currentThread().getId());
+                    CommonUtil.sleep(sleepTime);
+                    return message;
+             }
+         };
+         return c;
+   }
       
-     List<Callable<String>> tasks = new ArrayList<>();
-     tasks.add(create("Task1", 3000));
-     tasks.add(create("Task2", 2000));
-     tasks.add(create("Task3", 4000));
-     List<String> results = ParallelTaskHelper.execute("Test", tasks);
-     logger.info(results + "");
-     ```
+   List<Callable<String>> tasks = new ArrayList<>();
+   tasks.add(create("Task1", 3000));
+   tasks.add(create("Task2", 2000));
+   tasks.add(create("Task3", 4000));
+   List<String> results = ParallelTaskHelper.execute("Test", tasks);
+   logger.info(results + "");
+   ```
      
 **3. Crypto utilities**
   

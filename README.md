@@ -24,7 +24,8 @@ These are the few usage examples which commonly appear in most of the projects. 
 **2. Thread utilities**
 
    In order to span multiple tasks at the same time and wait for responses
-      
+     
+     ```java
      private Callable<String> create(final String message, final long sleepTime) {
 	     Callable<String> c = new Callable<String>() {
 	     
@@ -44,7 +45,8 @@ These are the few usage examples which commonly appear in most of the projects. 
      tasks.add(create("Task3", 4000));
      List<String> results = ParallelTaskHelper.execute("Test", tasks);
      logger.info(results + "");
-      
+     ```
+     
 **3. Crypto utilities**
   
   `CryptUtil` contains all the cryptographic and encode/decode methods which commonly used in most of the projects. Ex: urlencode/decode and encrypt/decrypt strings

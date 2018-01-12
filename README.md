@@ -8,7 +8,7 @@ These are the few usage examples which commonly appear in most of the projects. 
 
   Convert current time to ISO8601Format
   
-  ```java
+   ```java
    String iso8601DateStr = DateUtil.getIso8601Format(System.currentTimeMillis());
    ```
   
@@ -46,7 +46,47 @@ These are the few usage examples which commonly appear in most of the projects. 
    List<String> results = ParallelTaskHelper.execute("Test", tasks);
    logger.info(results + "");
    ```
-     
+   
+   Java `BlockingQueue<T>` is amazing, in order to use it properly created a helper class which will give automatic thread controls via worker count. Here are the few examples
+   
+   ```java
+   class TestListener implements BlockingQueueListener<String> {
+         @Override
+         public void handleMessage(String message) {
+              logger.info(Thread.currentThread().getName() + " consumed message:"+ message);
+	 }
+   }
+   
+   //Usage simple publisher/consumer 
+   List<BlockingQueueListener<String>> listeners = new ArrayList<>();
+   // depends on how many consumers/listeners
+   for (int i = 0; i < 2; i++) {
+       listeners.add(new TestListener());
+   }
+   BlockingQueueHelper<String> helper = new BlockingQueueHelper<>("TestPool-", 1000, listeners);
+   helper.start();
+   // Produce messages to queue;
+   for (int i = 0; i < 100000; i++) {
+       helper.put("Message - " + i);
+    }
+    // Wait for messages to drain
+    CommonUtil.sleep(2000);
+    
+    //Incase need a PriorityBlockingQueue to hold messages
+    // If you use comparator in the constructor, inside it will use PriorityQueue to store the messages
+    BlockingQueueHelper<String> helper = new BlockingQueueHelper<>("TestPool-", 1000, listeners, new Comparator<String>() {                                          @Override
+                                       public int compare(String o1, String o2) {
+                                              return o2.compareTo(o1);
+                                       }});
+    helper.start();
+    // Produce messages to queue;
+    for (int i = 0; i < 10000; i++) {
+          helper.put("Message - " + i);
+    }
+    // Wait for messages to drain
+    CommonUtil.sleep(2000);
+   ```
+   
 **3. Crypto utilities**
   
   `CryptUtil` contains all the cryptographic and encode/decode methods which commonly used in most of the projects. Ex: urlencode/decode and encrypt/decrypt strings

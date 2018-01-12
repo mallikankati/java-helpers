@@ -74,10 +74,13 @@ These are the few usage examples which commonly appear in most of the projects. 
     
     //Incase need a PriorityBlockingQueue to hold messages
     // If you use comparator in the constructor, inside it will use PriorityQueue to store the messages
-    BlockingQueueHelper<String> helper = new BlockingQueueHelper<>("TestPool-", 1000, listeners, new Comparator<String>() {                                          @Override
+    BlockingQueueHelper<String> helper = new BlockingQueueHelper<>("TestPool-", 1000, listeners, 
+                                 new Comparator<String>() {                                          
+                                       @Override
                                        public int compare(String o1, String o2) {
                                               return o2.compareTo(o1);
-                                       }});
+                                       }
+				 });
     helper.start();
     // Produce messages to queue;
     for (int i = 0; i < 10000; i++) {
